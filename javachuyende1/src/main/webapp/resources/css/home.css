@@ -1,0 +1,243 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #eef7f9;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar chính */
+.navbar {
+  background-color: #007b8a !important;
+}
+
+/* Làm đẹp Carousel */
+#demo {
+  border: 4px solid #007b8a; /* viền xanh y tế */
+  border-radius: 15px; /* bo góc */
+  overflow: hidden; /* ẩn phần tràn ra ngoài góc bo */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* đổ bóng nhẹ */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.carousel-inner img {
+  border-radius: 0; /* không cần bo thêm vì đã overflow hidden */
+}
+
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  background-color: #005f6b;
+  color: #ffffff !important;
+}
+
+/* Sub-navbar */
+.sub-navbar {
+  background-color: #0096a6;
+  padding: 10px 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.sub-navbar .nav-link {
+  color: white !important;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.sub-navbar .nav-link:hover {
+  background-color: #007b8a;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #dff6ff, #ffffff);
+  padding: 80px 0;
+}
+
+.hero .container {
+  max-width: 1140px;
+}
+
+.hero .row.align-items-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero .col-md-6 {
+  flex: 0 0 48%;
+  max-width: 48%;
+}
+
+.hero h1 {
+  color: #0f4c75;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.hero .btn-primary {
+  background-color: #007b8a;
+  border: none;
+}
+
+.hero .btn-primary:hover {
+  background-color: #006e7d;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+}
+
+/* Carousel */
+.carousel-inner img {
+  object-fit: cover;
+  height: 750px;
+  width: 100%;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: rgb(0, 0, 0);
+  padding: 25px 30px;
+  border-radius: 10%;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-next-icon:hover,
+.carousel-control-prev-icon:hover {
+  padding: 30px 35px;
+  box-shadow: 0px 0px 2px 3px white;
+}
+
+/* Sections */
+.section-light {
+  background-color: #ffffff;
+  padding: 60px 0;
+}
+
+.section-alt {
+  background-color: #f2f7f9;
+  padding: 60px 0;
+}
+
+h2, h5 {
+  color: #145da0;
+}
+
+.rounded-img {
+  max-height: 480px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+  background-color: #145da0;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero .row.align-items-center {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero .col-md-6 {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .sub-navbar .nav-link {
+    margin: 5px 6px;
+    display: inline-block;
+  }
+
+  .sub-navbar .container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.section {
+  padding: 80px 0;
+}
+
+.section h2 {
+  color: #145da0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+}
+/* Modal header màu vàng */
+.modal-header {
+  background-color: #f0ad4e; /* vàng Bootstrap */
+  color: #fff;
+}
+
+/* Nút xem thông tin màu vàng */
+.btn-info-yellow {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  color: white;
+  font-weight: 600;
+  width: 100%; /* Nút rộng bằng chiều ngang card-body */
+  transition: background-color 0.3s ease;
+}
+
+.btn-info-yellow:hover,
+.btn-info-yellow:focus {
+  background-color: #ec971f;
+  border-color: #d58512;
+  color: white;
+}
+
+/* Đảm bảo tất cả card-body có chiều cao tối thiểu bằng nhau */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px; /* điều chỉnh tuỳ theo nội dung */
+}
+
+/* Nút luôn nằm dưới cùng */
+.card-body > button {
+  margin-top: auto;
+}
+
