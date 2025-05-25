@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import demo.quanliyte.test.entity.Appointment;
 import demo.quanliyte.test.entity.Role;
 import demo.quanliyte.test.entity.Status;
 import demo.quanliyte.test.entity.User;

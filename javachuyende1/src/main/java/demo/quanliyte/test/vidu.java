@@ -82,9 +82,9 @@ public class vidu {
         return "admin/clinicschedule/quanlylichkham"; // trả về login.jsp
     }
 
-    @GetMapping("/quanlythuoc")
-    public String medicineManage() {
-        return "admin/medicine/quanlythuoc"; // trả về login.jsp
+    @GetMapping("/baocaothuoc")
+    public String baocaothuoc() {
+        return "admin/medicine/baocao"; // trả về login.jsp
     }
 
     @GetMapping("/quanlyhoadon")

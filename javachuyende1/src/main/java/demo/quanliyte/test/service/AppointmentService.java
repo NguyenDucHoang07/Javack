@@ -30,4 +30,9 @@ public class AppointmentService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    public List<Appointment> searchByPatientName(String keyword) {
+        return repository.findByPatientFullNameContainingIgnoreCase(keyword);
+    }
+
 }

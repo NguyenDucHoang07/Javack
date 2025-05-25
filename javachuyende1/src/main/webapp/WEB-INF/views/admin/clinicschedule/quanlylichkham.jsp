@@ -24,7 +24,6 @@
 						min-height: 100vh;
 						display: flex;
 						justify-content: center;
-
 						margin: 0;
 					}
 
@@ -35,7 +34,6 @@
 						background: #ffffff;
 						border-radius: 12px;
 						box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-
 					}
 
 					h2 {
@@ -47,31 +45,69 @@
 					}
 
 					.table {
-						border-radius: 8px;
-						overflow: hidden;
-						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+						border-collapse: separate;
+						/* Tách từng ô ra, không dính */
+						border-spacing: 0 8px;
+						/* khoảng cách giữa các hàng */
+						width: 100%;
 					}
 
-					.table thead {
+					.table thead tr {
 						background-color: #1a73e8;
 						color: #ffffff;
+						border-radius: 12px;
 					}
 
-					.table th,
-					.table td {
-						padding: 12px 15px;
+					.table thead th {
+						padding: 14px 20px;
+						font-weight: 600;
+						text-align: left;
 						vertical-align: middle;
-						border: none;
+					}
+
+					.table tbody tr {
+						background-color: #f9fbff;
+						/* nền nhẹ cho hàng */
+						border-radius: 12px;
+						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+						transition: background-color 0.3s ease;
+					}
+
+					.table tbody tr:hover {
+						background-color: #d0e1ff;
 					}
 
 					.table tbody td {
-						border-bottom: 1px solid #dee2e6;
+						padding: 12px 20px;
+						vertical-align: middle;
+						border: none;
+						/* tạo border trái phải để nhìn rõ từng cột */
+						border-left: 1px solid #e3e6ea;
+						border-right: 1px solid #e3e6ea;
+					}
+
+					.table tbody tr:first-child td:first-child {
+						border-top-left-radius: 12px;
+					}
+
+					.table tbody tr:first-child td:last-child {
+						border-top-right-radius: 12px;
+					}
+
+					.table tbody tr:last-child td:first-child {
+						border-bottom-left-radius: 12px;
+					}
+
+					.table tbody tr:last-child td:last-child {
+						border-bottom-right-radius: 12px;
 					}
 
 					.table-responsive {
-						border-radius: 8px;
+						border-radius: 12px;
+						overflow: auto;
 					}
 
+					/* Đảm bảo responsive trên mobile */
 					@media (max-width: 768px) {
 						.container {
 							margin: 20px;
@@ -96,12 +132,12 @@
 					<h2>Danh sách lịch hẹn</h2>
 
 					<!-- Search form -->
-					<form method="get" action="appointments"
-						class="mb-3 d-flex justify-content-between align-items-center">
+					<form method="get" action="appointments" class="mb-3 d-flex flex-wrap align-items-center gap-2">
 						<input type="text" name="keyword" placeholder="Tìm theo tên bệnh nhân..." value="${keyword}"
-							class="form-control me-2" style="max-width: 300px;" />
+							class="form-control" style="max-width: 300px;" />
 						<button type="submit" class="btn btn-primary">Tìm kiếm</button>
-						<a href="appointments" class="btn btn-secondary ms-2">Xóa tìm kiếm</a>
+						<a href="appointments" class="btn btn-secondary">Xóa tìm kiếm</a>
+
 						<button type="button" class="btn btn-success ms-auto" data-bs-toggle="modal"
 							data-bs-target="#addAppointmentModal">
 							+ Thêm lịch hẹn mới
@@ -119,11 +155,19 @@
 											aria-label="Đóng"></button>
 									</div>
 									<div class="modal-body">
+
+
 										<div class="mb-3">
 											<label for="patientName" class="form-label">Tên bệnh nhân</label>
-											<input type="text" class="form-control" id="patientName" name="patientName"
-												required>
+											<form:select path="patient.id" cssClass="form-select" id="patientId"
+												required="required">
+
+												<form:option value="" label="Chọn bệnh nhân" />
+												<form:options items="${listPatient}" itemValue="id"
+													itemLabel="fullName" />
+											</form:select>
 										</div>
+
 										<!-- <select id="doctorId" name="doctor.id" class="form-select" required>
 										<option value="">Chọn bác sĩ</option>
 										<c:forEach var="doctor" items="${doctors}">
@@ -212,20 +256,37 @@
 							<tbody>
 								<c:forEach var="a" items="${appointments}">
 									<tr>
-										<td>${a.id}</td>
-										<td>${a.patient.name}</td>
-										<td>${a.doctor.name}</td>
-										<td>${a.appointmentDate}</td>
-										<td>${a.timeSlot}</td>
-										<td>${a.department}</td>
+										<td class="font-monospace text-muted">${a.id}</td>
+										<td class="fw-bold">${a.patient.fullName}</td>
+										<td class="fw-bold">${a.doctor.name}</td>
+										<td class="text-primary">${a.appointmentDate}</td>
+										<td class="text-info">${a.timeSlot}</td>
+										<td class="text-success">${a.department}</td>
 										<td>${a.reason}</td>
-										<td>${a.status}</td>
-										<td>${a.createdAt}</td>
 										<td>
-											<a href="appointments/edit/${a.id}"
-												class="btn btn-sm btn-warning me-1">Sửa</a>
-											<a href="appointments/delete/${a.id}" class="btn btn-sm btn-danger"
-												onclick="return confirm('Bạn có chắc muốn xóa lịch hẹn này?');">Xóa</a>
+											<c:choose>
+												<c:when test="${a.status == 'Đã khám'}">
+													<span class="badge bg-success">${a.status}</span>
+												</c:when>
+												<c:otherwise>
+													<span class="badge bg-warning text-dark">${a.status}</span>
+												</c:otherwise>
+											</c:choose>
+										</td>
+										<td class="text-primary">${a.formattedCreatedAt}</td>
+										<td>
+											<div class="d-flex gap-2">
+												<a href="appointments/edit/${a.id}"
+													class="btn btn-sm btn-warning flex-grow-1">Sửa</a>
+												<form
+													action="${pageContext.request.contextPath}/appointments/deleteAppointment/${a.id}"
+													method="post"
+													onsubmit="return confirm('Bạn có chắc muốn xoá bệnh nhân này?');"
+													class="m-0 p-0">
+													<button type="submit"
+														class="btn btn-sm btn-danger flex-grow-1">Xoá</button>
+												</form>
+											</div>
 										</td>
 									</tr>
 								</c:forEach>
@@ -235,6 +296,7 @@
 									</tr>
 								</c:if>
 							</tbody>
+
 						</table>
 					</div>
 				</div>

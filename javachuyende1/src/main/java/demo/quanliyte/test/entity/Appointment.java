@@ -2,6 +2,7 @@ package demo.quanliyte.test.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -95,6 +96,11 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFormattedCreatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return createdAt != null ? createdAt.format(formatter) : "";
     }
 
     public LocalDateTime getCreatedAt() {

@@ -1,0 +1,15 @@
+package demo.quanliyte.test.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import demo.quanliyte.test.entity.Manufacturer;
+
+@Repository
+public interface ManufactRepository extends JpaRepository<Manufacturer, Long> {
+
+    @Query("SELECT MAX(m.code) FROM Manufacturer m")
+    String findMaxCode();
+
+}
