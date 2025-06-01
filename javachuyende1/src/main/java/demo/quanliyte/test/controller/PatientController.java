@@ -78,7 +78,8 @@ public class PatientController {
     public String updatePatient(@ModelAttribute("patient") Patient patient, Model model) {
         try {
             patientService.updatePatient(patient);
-            return "redirect:/patients?success=update"; // chuyển về danh sách bệnh nhân sau khi sửa thành công
+            return "redirect:/patients?success=update"; // chuyển về danh sách bệnh nhân
+
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Cập nhật thất bại: " + e.getMessage());
             model.addAttribute("patient", patient);

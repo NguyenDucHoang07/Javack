@@ -44,6 +44,14 @@
 						margin-bottom: 30px;
 					}
 
+					.btn-fix-height {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 100%;
+						/* hoặc cụ thể: height: 38px; */
+					}
+
 					.table {
 						border-collapse: separate;
 						/* Tách từng ô ra, không dính */
@@ -258,6 +266,7 @@
 									<tr>
 										<td class="font-monospace text-muted">${a.id}</td>
 										<td class="fw-bold">${a.patient.fullName}</td>
+										<td class="fw-bold">${a.patient.fullName}</td>
 										<td class="fw-bold">${a.doctor.name}</td>
 										<td class="text-primary">${a.appointmentDate}</td>
 										<td class="text-info">${a.timeSlot}</td>
@@ -276,17 +285,19 @@
 										<td class="text-primary">${a.formattedCreatedAt}</td>
 										<td>
 											<div class="d-flex gap-2">
-												<a href="appointments/edit/${a.id}"
-													class="btn btn-sm btn-warning flex-grow-1">Sửa</a>
+												<a href="/appointments/editStatus/${a.id}"
+													class="btn btn-warning w-100 btn-fix-height">Cập nhật</a>
 												<form
 													action="${pageContext.request.contextPath}/appointments/deleteAppointment/${a.id}"
 													method="post"
-													onsubmit="return confirm('Bạn có chắc muốn xoá bệnh nhân này?');"
-													class="m-0 p-0">
-													<button type="submit"
-														class="btn btn-sm btn-danger flex-grow-1">Xoá</button>
+													onsubmit="return confirm('Bạn có chắc muốn xoá lịch hẹn này?');"
+													class="w-100">
+													<button type="submit" class="btn btn-danger w-100">Xoá</button>
 												</form>
 											</div>
+
+
+
 										</td>
 									</tr>
 								</c:forEach>

@@ -14,33 +14,16 @@
     <body>
 
       <!-- THÔNG BÁO THÀNH CÔNG -->
-      <c:if test="${not empty successMessage}">
+      <!-- <c:if test="${not empty successMessage}">
         <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
           ${successMessage}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
         </div>
-      </c:if>
+      </c:if> -->
 
       <!-- NAVBAR CHÍNH -->
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand" href="#">Y tế Thông minh</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
-            </ul>
-            <form class="d-flex ms-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Tìm kiếm" />
-              <button class="btn btn-outline-light" type="submit">Tìm</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+      <jsp:include page="./header.jsp" />
+
 
       <!-- SUB-NAVBAR -->
       <nav class="sub-navbar">
@@ -69,72 +52,58 @@
       </section>
 
       <!-- FORM ĐẶT LỊCH HẸN -->
-      <section class="section section-light py-5">
-        <div class="container">
-          <form action="/admin/clinicschedule/giaodien/submit-lichhen" method="post">
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="ten" class="form-label">Họ và Tên <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="ten" name="ten" required />
-                <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
-              </div>
-              <div class="col-md-3">
-                <label for="tuoi" class="form-label">Tuổi <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="tuoi" name="tuoi" min="0" max="150" required />
-                <div class="invalid-feedback">Vui lòng nhập tuổi hợp lệ.</div>
-              </div>
-              <div class="col-md-3">
-                <label for="ngaysinh" class="form-label">Ngày sinh <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="ngaysinh" name="ngaysinh" required />
-                <div class="invalid-feedback">Vui lòng chọn ngày sinh.</div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="thongtinKham" class="form-label">Thông tin khám <span class="text-danger">*</span></label>
-              <select class="form-select" id="thongtinKham" name="thongtinKham" required>
-                <option value="" selected disabled>Chọn loại khám</option>
-                <option value="Khám tổng quát">Khám tổng quát</option>
-                <option value="Khám chuyên khoa">Khám chuyên khoa</option>
-                <option value="Khám tai mũi họng">Khám tai mũi họng</option>
-                <option value="Khám sản phụ khoa">Khám sản phụ khoa</option>
-                <option value="Khám nhi khoa">Khám nhi khoa</option>
-              </select>
-              <div class="invalid-feedback">Vui lòng chọn loại khám.</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="chitietBenh" class="form-label">Chi tiết bệnh tình <span class="text-danger">*</span></label>
-              <textarea class="form-control" id="chitietBenh" name="chitietBenh" rows="4"
-                placeholder="Mô tả triệu chứng hoặc tình trạng bệnh" required></textarea>
-              <div class="invalid-feedback">Vui lòng nhập chi tiết bệnh tình.</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="thoigianKham" class="form-label">Thời gian khám được <span
-                  class="text-danger">*</span></label>
-              <input type="datetime-local" class="form-control" id="thoigianKham" name="thoigianKham" required />
-              <div class="invalid-feedback">Vui lòng chọn thời gian khám.</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="diachi" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="diachi" name="diachi" placeholder="Nhập địa chỉ liên hệ"
-                required />
-              <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="sodienthoai" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
-              <input type="tel" class="form-control" id="sodienthoai" name="sodienthoai"
-                placeholder="Nhập số điện thoại liên hệ" pattern="[0-9]{9,15}" required />
-              <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (9-15 số).</div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Đặt lịch hẹn</button>
-          </form>
+      <form action="/admin/clinicschedule/giaodien/confirm" method="post">
+        <!-- các trường như cũ -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="appointmentDate" class="form-label">Ngày khám <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="appointmentDate" name="appointmentDate" required />
+          </div>
+          <div class="col-md-6">
+            <label for="timeSlot" class="form-label">Khung giờ khám <span class="text-danger">*</span></label>
+            <select class="form-select" id="timeSlot" name="timeSlot" required>
+              <!-- <option value="" selected disabled>Chọn khung giờ</option>
+              <option value="08:00 - 09:00">08:00 - 09:00</option>
+              <option value="09:00 - 10:00">09:00 - 10:00</option>
+              <option value="10:00 - 11:00">10:00 - 11:00</option>
+              <option value="13:00 - 14:00">13:00 - 14:00</option>
+              <option value="14:00 - 15:00">14:00 - 15:00</option> -->
+            </select>
+          </div>
         </div>
-      </section>
+
+        <h2 class="mb-4 text-center">Chọn dịch vụ khám</h2>
+        <div class="mb-3">
+          <div class="row">
+            <c:forEach var="svc" items="${services}">
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="serviceId" id="service_${svc.id}" value="${svc.id}"
+                    required>
+                  <label class="form-check-label" for="service_${svc.id}">
+                    ${svc.name}
+                  </label>
+                </div>
+              </div>
+            </c:forEach>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="reason" class="form-label">Lý do khám <span class="text-danger">*</span></label>
+          <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tiếp tục</button>
+      </form>
+
+
+      <c:if test="${not empty successMessage}">
+        <div class="alert alert-success">
+          ${successMessage}
+        </div>
+      </c:if>
+
 
       <!-- FOOTER -->
       <footer>
@@ -158,6 +127,26 @@
             }, false);
           });
         })();
+
+        const timeSlots = [
+          "08:00",
+          "09:00",
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00",
+          "14:00",
+          "15:00",
+          "16:00",
+        ];
+
+        const select = document.getElementById('timeSlot');
+        timeSlots.forEach(slot => {
+          const option = document.createElement('option');
+          option.value = slot;
+          option.textContent = slot;
+          select.appendChild(option);
+        });
       </script>
     </body>
 

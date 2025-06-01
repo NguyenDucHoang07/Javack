@@ -35,7 +35,13 @@
                     <div class="container-fluid px-4 mt-4">
                         <!-- Header -->
 
+
                         <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <a href="/" class="btn btn-outline-secondary me-2">
+                                    <i class="bi bi-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
                             <h1 class="mb-0"><i class="bi bi-people-fill me-2"></i>Quản lý Người dùng</h1>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                                 <i class="bi bi-plus-lg"></i> Thêm người dùng
@@ -100,14 +106,16 @@
                                             <option value="" <c:if test="${empty roleFilter}">selected</c:if>
                                                 >Lọc theo vai trò</option>
 
-                                            <option value="Admin" <c:if test="${roleFilter == 'Admin'}">selected</c:if>
+                                            <option value="Admin" <c:if test="${roleFilter == 'Admin'}">selected
+                                                </c:if>
                                                 >Admin</option>
 
                                             <option value="Bác sĩ" <c:if test="${roleFilter == 'Bác sĩ'}">selected
                                                 </c:if>
                                                 >Bác sĩ</option>
 
-                                            <option value="Nhân viên" <c:if test="${roleFilter == 'Nhân viên'}">selected
+                                            <option value="Nhân viên" <c:if test="${roleFilter == 'Nhân viên'}">
+                                                selected
                                                 </c:if>
                                                 >Nhân viên</option>
 
@@ -122,7 +130,8 @@
                                                 selected</c:if>
                                                 >Hoạt động</option>
 
-                                            <option value="Đã khóa" <c:if test="${statusFilter == 'Đã khóa'}">selected
+                                            <option value="Đã khóa" <c:if test="${statusFilter == 'Đã khóa'}">
+                                                selected
                                                 </c:if>
                                                 >Đã khóa</option>
 
@@ -181,18 +190,23 @@
                                                         <c:when test="${user.role.name == 'Bác sĩ'}">
                                                             <span class="badge bg-success">Bác sĩ</span>
                                                         </c:when>
-                                                        <c:otherwise>
-                                                            <span class="badge bg-secondary">Nhân viên</span>
-                                                        </c:otherwise>
+                                                        <c:when test="${user.role.name == 'Nhân viên'}">
+                                                            <span class="badge bg-success">Nhân viên</span>
+                                                        </c:when>
+                                                        <c:when test="${user.role.name == 'Bệnh nhân'}">
+                                                            <span class="badge bg-success">Khách hàng</span>
+                                                        </c:when>
                                                     </c:choose>
                                                 </td>
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${user.status.name == 'Kích hoạt'}">
-                                                            <span class="badge bg-success status-badge">Hoạt động</span>
+                                                            <span class="badge bg-success status-badge">Hoạt
+                                                                động</span>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <span class="badge bg-danger status-badge">Đã khóa</span>
+                                                            <span class="badge bg-danger status-badge">Đã
+                                                                khóa</span>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>

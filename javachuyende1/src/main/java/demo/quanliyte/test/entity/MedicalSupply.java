@@ -28,6 +28,8 @@ public class MedicalSupply {
 
     private BigDecimal purchasePrice;
 
+    private BigDecimal sellingPrice;
+
     private LocalDate entryDate;
 
     private String note;
@@ -122,6 +124,14 @@ public class MedicalSupply {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public BigDecimal getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(BigDecimal sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 
 }

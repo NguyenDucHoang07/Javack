@@ -35,4 +35,12 @@ public class AppointmentService {
         return repository.findByPatientFullNameContainingIgnoreCase(keyword);
     }
 
+    public List<Appointment> findByUserId(Long userId) {
+        return repository.findByPatientId(userId);
+    }
+
+    public List<Appointment> findByPatientId(Long patientId) {
+        return repository.findByPatientId(patientId);
+    }
+
 }

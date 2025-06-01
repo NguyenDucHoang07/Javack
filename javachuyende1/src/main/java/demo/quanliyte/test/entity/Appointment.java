@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import demo.quanliyte.test.service.MedicalService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,8 @@ public class Appointment {
     private String status; // Trạng thái lịch hẹn
 
     private LocalDateTime createdAt; // Thời gian tạo lịch hẹn
+    @ManyToOne
+    private MedicalServic medicalService;
 
     public Long getId() {
         return id;
@@ -109,6 +112,14 @@ public class Appointment {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public MedicalServic getMedicalService() {
+        return medicalService;
+    }
+
+    public void setMedicalService(MedicalServic medicalService) {
+        this.medicalService = medicalService;
     }
 
 }

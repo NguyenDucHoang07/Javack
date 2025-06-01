@@ -27,6 +27,9 @@ public class User {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> doctorAppointments;
 
+    @OneToOne(mappedBy = "user")
+    private Patient patient;
+
     public List<Appointment> getDoctorAppointments() {
         return doctorAppointments;
     }

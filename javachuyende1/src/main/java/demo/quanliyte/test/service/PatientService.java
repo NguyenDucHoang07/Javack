@@ -1,5 +1,6 @@
 package demo.quanliyte.test.service;
 
+import demo.quanliyte.test.entity.Appointment;
 import demo.quanliyte.test.entity.Patient;
 import demo.quanliyte.test.entity.User;
 import demo.quanliyte.test.repository.PatientRepository;
@@ -34,4 +35,13 @@ public class PatientService {
     public void updatePatient(Patient patient) {
         patientRepository.save(patient); // save = update nếu đã có ID
     }
+
+    public Patient findByUser(User user) {
+        return patientRepository.findByUser(user);
+    }
+
+    public Patient findByUserId(Long userId) {
+        return patientRepository.findByUserId(userId);
+    }
+
 }

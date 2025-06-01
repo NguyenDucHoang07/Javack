@@ -39,7 +39,12 @@
                             </nav>
                         </div>
 
-                        <a class="nav-link" href="/quanlyhoadon">
+                        <a class="nav-link" href="/quanlydichvu">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            Quản lý dịch vụ
+                        </a>
+
+                        <a class="nav-link" href="/invoices">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
                             Quản lý Hóa đơn & Thanh toán
                         </a>

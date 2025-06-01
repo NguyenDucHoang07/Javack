@@ -22,10 +22,10 @@ public class vidu {
         return "giaodien/thuoc_vattu"; // trả về thuoc-vattu.jsp
     }
 
-    @GetMapping("giaodien/lichhenkham")
-    public String lichhenkhamPage() {
-        return "giaodien/lichhenkham";
-    }
+    // @GetMapping("giaodien/lichhenkham")
+    // public String lichhenkhamPage() {
+    // return "giaodien/lichhenkham";
+    // }
 
     @GetMapping("giaodien/chaomung")
     public String chaomung() {
@@ -52,25 +52,10 @@ public class vidu {
         return "giaodien/update_patient"; // tương ứng home.jsp trong /WEB-INF/views
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login"; // trả về login.jsp
-    }
-
     @GetMapping("/")
-    public String loginForm() {
+    public String showGiaodien() {
         return "admin/dashboard/show"; // trả về login.jsp
     }
-
-    // @GetMapping("/quanlynguoidung")
-    // public String userManage() {
-    // return "admin/user/quanlynguoidung"; // trả về login.jsp
-    // }
-
-    // @GetMapping("/quanlybenhnhan")
-    // public String patienManage() {
-    // return "admin/patient/quanlybenhnhan"; // trả về login.jsp
-    // }
 
     @GetMapping("/quanlybacsi")
     public String doctorManage() {

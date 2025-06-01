@@ -32,6 +32,7 @@
                                 <th>Đơn vị</th>
                                 <th>Số lượng</th>
                                 <th>Hạn dùng</th>
+                                <th>Giá nhập</th>
                                 <th>Giá bán</th>
                                 <th>Nhà sản xuất</th>
                                 <th>Thao tác</th>
@@ -46,6 +47,7 @@
                                     <td>${med.unit}</td>
                                     <td>${med.quantity}</td>
                                     <td>${med.expiryDate}</td>
+                                    <td>${med.purchasePrice} VNĐ</td>
                                     <td>${med.salePrice} VNĐ</td>
                                     <td>${med.manufacturer.name}</td>
                                     <td>

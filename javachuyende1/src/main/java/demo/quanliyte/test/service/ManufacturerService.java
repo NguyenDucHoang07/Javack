@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import demo.quanliyte.test.entity.Manufacturer;
-import demo.quanliyte.test.entity.Patient;
+
 import demo.quanliyte.test.repository.ManufactRepository;
 
 @Service

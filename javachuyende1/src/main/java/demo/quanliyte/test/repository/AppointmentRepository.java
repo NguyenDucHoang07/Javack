@@ -11,4 +11,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     // Bạn có thể thêm phương thức tùy chỉnh nếu cần
     List<Appointment> findByPatientFullNameContainingIgnoreCase(String keyword);
 
+    List<Appointment> findByPatientId(Long patientId);
 }

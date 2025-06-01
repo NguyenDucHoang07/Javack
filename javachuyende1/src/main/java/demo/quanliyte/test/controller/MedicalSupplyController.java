@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import demo.quanliyte.test.entity.MedicalSupply;
+import demo.quanliyte.test.entity.Medicine;
 import demo.quanliyte.test.service.ManufacturerService;
 import demo.quanliyte.test.service.MedicalService;
 
@@ -36,11 +37,13 @@ public class MedicalSupplyController {
         return "redirect:/quanlyvattu";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/editvattu/{id}")
     public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("supply", medicalSupplyService.findById(id).orElse(null));
+        MedicalSupply supply = medicalSupplyService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid medicine Id:" + id));
+        model.addAttribute("supply", supply);
         model.addAttribute("manufacturers", manufacturerService.getAllManufacturers());
-        return "admin/medicine/editVattu";
+        return "admin/medicine/editvattu";
     }
 
     @PostMapping("/update")
@@ -49,7 +52,7 @@ public class MedicalSupplyController {
         return "redirect:/quanlyvattu?success=update";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/deletevattu/{id}")
     public String delete(@PathVariable Long id) {
         medicalSupplyService.deleteById(id);
         return "redirect:/quanlyvattu?success=delete";

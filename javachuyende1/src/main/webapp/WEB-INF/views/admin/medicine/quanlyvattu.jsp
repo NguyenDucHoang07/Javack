@@ -32,6 +32,7 @@
                                 <th>Hạn dùng</th>
                                 <th>Nhà cung cấp</th>
                                 <th>Giá nhập</th>
+                                <th>Giá bán</th>
                                 <th>Ngày nhập</th>
                                 <th>Ghi chú</th>
                                 <th>Hành động</th>
@@ -48,18 +49,18 @@
                                     <td>${supply.expiryDate}</td>
                                     <td>${supply.manufacturer.name}</td>
                                     <td>${supply.purchasePrice}</td>
+                                    <td>${supply.sellingPrice}</td>
                                     <td>${supply.entryDate}</td>
                                     <td>${supply.note}</td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/vattu/edit/${supply.id}"
-                                            class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/vattu/delete/${supply.id}"
-                                            class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Bạn có chắc chắn muốn xóa vật tư này?');">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        <a href="${pageContext.request.contextPath}/quanlyvattu/editvattu/${supply.id}"
+                                            class="btn btn-info btn-sm me-1">Sửa</a>
+                                        <form
+                                            action="${pageContext.request.contextPath}/quanlyvattu/deletevattu/${supply.id}"
+                                            method="post" style="display:inline;"
+                                            onsubmit="return confirm('Bạn có chắc muốn xoá bệnh nhân này?');">
+                                            <button type="submit" class="btn btn-danger btn-sm">Xoá</button>
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -89,16 +90,34 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Loại vật tư *</label>
-                                        <input type="text" class="form-control" name="type" required>
+                                        <select class="form-control" name="type" required>
+                                            <option value="" disabled selected>-- Chọn loại vật tư --</option>
+                                            <option value="Dụng cụ">Dụng cụ</option>
+                                            <option value="Trang thiết bị">Trang thiết bị</option>
+                                            <option value="Vật liệu tiêu hao">Vật liệu tiêu hao</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
                                     </div>
+
                                     <div class="mb-3">
                                         <label class="form-label">Số lượng *</label>
                                         <input type="number" class="form-control" name="quantity" required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Đơn vị *</label>
-                                        <input type="text" class="form-control" name="unit" required>
+                                        <select class="form-control" name="unit" required>
+                                            <option value="" disabled selected>-- Chọn đơn vị --</option>
+                                            <option value="Cái">Cái</option>
+                                            <option value="Hộp">Hộp</option>
+                                            <option value="Bộ">Bộ</option>
+                                            <option value="Tuýp">Tuýp</option>
+                                            <option value="Chai">Chai</option>
+                                            <option value="Lọ">Lọ</option>
+                                            <option value="Viên">Viên</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
                                     </div>
+
                                     <div class="mb-3">
                                         <label class="form-label">Hạn sử dụng</label>
                                         <input type="date" class="form-control" name="expiryDate">
@@ -117,6 +136,11 @@
                                     <div class="mb-3">
                                         <label class="form-label">Giá nhập *</label>
                                         <input type="number" step="0.01" class="form-control" name="purchasePrice"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Giá bán *</label>
+                                        <input type="number" step="0.01" class="form-control" name="sellingPrice"
                                             required>
                                     </div>
                                     <div class="mb-3">
