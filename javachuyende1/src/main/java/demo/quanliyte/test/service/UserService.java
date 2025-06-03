@@ -62,4 +62,29 @@ public class UserService {
         return userRepository.findByRole_Id(2L); // 2 là ID của role "doctor"
     }
 
+    public void update(User user) {
+        Optional<User> existingUserOpt = userRepository.findById(user.getId());
+
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+
+            // Cập nhật các trường được phép chỉnh sửa
+            existingUser.setName(user.getName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPhone(user.getPhone());
+
+            // Cập nhật avatar nếu có ảnh mới
+            if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
+                existingUser.setAvatar(user.getAvatar());
+            }
+
+            // KHÔNG cập nhật các trường nhạy cảm hoặc không có trong form: password, role,
+            // status, patient, doctorAppointments
+
+            userRepository.save(existingUser);
+        } else {
+            throw new RuntimeException("Không tìm thấy người dùng với ID: " + user.getId());
+        }
+    }
+
 }

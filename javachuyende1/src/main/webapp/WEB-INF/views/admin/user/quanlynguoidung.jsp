@@ -185,18 +185,27 @@
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${user.role.name == 'Admin'}">
-                                                            <span class="badge bg-primary">Admin</span>
+                                                            <span class="badge bg-danger">Admin</span>
+                                                            <!-- Đỏ nổi bật -->
                                                         </c:when>
                                                         <c:when test="${user.role.name == 'Bác sĩ'}">
                                                             <span class="badge bg-success">Bác sĩ</span>
+                                                            <!-- Xanh lá -->
                                                         </c:when>
                                                         <c:when test="${user.role.name == 'Nhân viên'}">
-                                                            <span class="badge bg-success">Nhân viên</span>
+                                                            <span class="badge bg-info text-dark">Nhân viên</span>
+                                                            <!-- Xanh nhạt -->
                                                         </c:when>
                                                         <c:when test="${user.role.name == 'Bệnh nhân'}">
-                                                            <span class="badge bg-success">Khách hàng</span>
+                                                            <span class="badge bg-secondary">Khách hàng</span>
+                                                            <!-- Xám -->
                                                         </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge bg-dark">Không rõ</span>
+                                                            <!-- Trường hợp không xác định -->
+                                                        </c:otherwise>
                                                     </c:choose>
+
                                                 </td>
                                                 <td>
                                                     <c:choose>

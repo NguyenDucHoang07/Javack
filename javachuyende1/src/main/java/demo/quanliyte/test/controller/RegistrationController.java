@@ -1,9 +1,13 @@
 package demo.quanliyte.test.controller;
 
+import demo.quanliyte.test.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +29,17 @@ import jakarta.validation.Valid;
 @Controller
 public class RegistrationController {
 
+    private final UserService userService;
+
     @Autowired
     private RegistrationService registrationService;
 
     @Autowired
     private RegistrationRepository registrationRepository;
+
+    RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -120,6 +130,56 @@ public class RegistrationController {
         }
 
         return "admin/user/profile";
+    }
+
+    @PostMapping("/update-profile")
+    public String updateProfile(
+            @ModelAttribute("user") User user,
+            @RequestParam("avatarFile") MultipartFile avatarFile,
+            HttpServletRequest request,
+            HttpSession session,
+            Model model) {
+
+        // Lấy user đang đăng nhập từ session
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        // Gán id user đăng nhập vào user nhận từ form để đảm bảo cập nhật đúng user
+        user.setId(loggedInUser.getId());
+
+        // Xử lý upload avatar nếu có
+        if (!avatarFile.isEmpty()) {
+            try {
+                String fileName = UUID.randomUUID() + "_" + avatarFile.getOriginalFilename();
+                String uploadDir = request.getServletContext().getRealPath("/resources/avatars");
+                File dir = new File(uploadDir);
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                File dest = new File(dir, fileName);
+                avatarFile.transferTo(dest);
+
+                user.setAvatar("/avatars/" + fileName);
+
+            } catch (IOException e) {
+                model.addAttribute("errorMessage", "Lỗi khi upload avatar");
+                return "admin/user/profile"; // hoặc tên file jsp phù hợp
+            }
+        } else {
+            // Nếu không upload ảnh mới, giữ lại avatar cũ từ user đăng nhập
+            user.setAvatar(loggedInUser.getAvatar());
+        }
+
+        // Cập nhật user trong DB
+        userService.update(user);
+
+        // Cập nhật lại session với thông tin mới (nếu cần)
+        User updatedUser = userService.getUserById(user.getId());
+        session.setAttribute("loggedInUser", updatedUser);
+
+        return "redirect:/profile";
     }
 
 }

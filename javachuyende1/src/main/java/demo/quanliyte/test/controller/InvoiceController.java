@@ -88,7 +88,7 @@ public class InvoiceController {
         // Thêm các attribute cho form và dữ liệu
         model.addAttribute("invoice", new Invoice());
         model.addAttribute("patients", patientService.getAllPatient());
-        model.addAttribute("doctors", userService.getAllUsers());
+        model.addAttribute("doctors", userService.getDoctors());
         model.addAttribute("services", medicalServiceService.findAll());
 
         model.addAttribute("totalInvoices", invoiceService.getTotalInvoices());

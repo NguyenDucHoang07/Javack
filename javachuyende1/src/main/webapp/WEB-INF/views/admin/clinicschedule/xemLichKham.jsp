@@ -29,7 +29,7 @@
                                 <th scope="col">Lý do</th>
                                 <th scope="col">Trạng thái</th>
                                 <th scope="col">Ngày tạo</th>
-                                <th scope="col" style="min-width: 120px;">Hành động</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -53,19 +53,7 @@
                                         </c:choose>
                                     </td>
                                     <td class="text-primary">${a.formattedCreatedAt}</td>
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <a href="/appointments/editStatus/${a.id}"
-                                                class="btn btn-warning w-100 btn-fix-height">Cập nhật</a>
-                                            <form
-                                                action="${pageContext.request.contextPath}/appointments/deleteAppointment/${a.id}"
-                                                method="post"
-                                                onsubmit="return confirm('Bạn có chắc muốn xoá lịch hẹn này?');"
-                                                class="w-100">
-                                                <button type="submit" class="btn btn-danger w-100">Xoá</button>
-                                            </form>
-                                        </div>
-                                    </td>
+
                                 </tr>
                             </c:forEach>
 
